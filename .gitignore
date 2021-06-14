@@ -66,11 +66,11 @@ lib/generated_plugin_registrant.dart
 instance/*
 !instance/.gitignore
 .webassets-cache
-.env
+/server/.env
 
 ### Flask.Python Stack ###
 # Byte-compiled / optimized / DLL files
-__pycache__/
+/server/__pycache__
 *.py[cod]
 *$py.class
 
@@ -140,3 +140,5 @@ instance/
 # Sphinx documentation
 docs/_build/
 doc/_build/
+
+/server/.vscode
