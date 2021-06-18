@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../constants.dart';
 import '../SignIn/LogoDark.dart';
 import '../Fields/EmailField.dart';
-import '../Fields/UserNameField.dart';
+import 'UserNameField.dart';
 
 import 'background.dart';
 
@@ -91,8 +91,8 @@ class SignUpBttn extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          userNameFieldController.text; // check if this exists already
-          emailFieldController.text; // check if this email is taken
+          print(userNameFieldController.text); // check if this exists already
+          print(emailFieldController.text); // check if this email is taken
           if (passwordFieldController.text ==
               passwordFieldConfirmController.text)
             print(
@@ -171,8 +171,9 @@ class _PasswordFieldState extends State<PasswordField> {
                 TextStyle(color: LightGrey.withOpacity(0.8), fontSize: 20),
             // fillColor: LightBlueAccent.withOpacity(0.2),
           ),
-          onFieldSubmitted: (String pass) {
+          onSaved: (String? pass) {
             print("Saved pass: $pass");
+            // print(passwordFieldController.text);
           },
         ),
       ),
@@ -213,8 +214,9 @@ class _ConfirmPasswordFieldState extends State<ConfirmPasswordField> {
                 TextStyle(color: LightGrey.withOpacity(0.8), fontSize: 20),
             // fillColor: LightBlueAccent.withOpacity(0.2),
           ),
-          onFieldSubmitted: (String pass) {
+          onSaved: (String? pass) {
             print("Saved pass: $pass");
+            // print(passwordFieldConfirmController.text);
           },
         ),
       ),

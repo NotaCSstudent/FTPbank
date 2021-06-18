@@ -1,4 +1,4 @@
-import 'package:client/Screens/Fields/UserNameField.dart';
+import 'UserNameField.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants.dart';
@@ -18,7 +18,7 @@ class Signin extends StatelessWidget {
   }
 }
 
-final usernameFieldController = TextEditingController();
+final userNameFieldController = TextEditingController();
 final passwordFieldController = TextEditingController();
 
 class Body extends StatelessWidget {
@@ -83,7 +83,7 @@ class SignInBttn extends StatelessWidget {
         ),
         onPressed: () {
           print("Username: ");
-          print(usernameFieldController.text);
+          print(userNameFieldController.text);
           print("Password: ");
           print(passwordFieldController.text);
 
@@ -183,8 +183,9 @@ class _PasswordFieldState extends State<PasswordField> {
             labelStyle:
                 TextStyle(color: LightGrey.withOpacity(0.8), fontSize: 20),
           ),
-          onFieldSubmitted: (String pass) {
+          onSaved: (String? pass) {
             print("Saved pass: $pass");
+            // print(passwordFieldController.text);
           },
         ),
       ),

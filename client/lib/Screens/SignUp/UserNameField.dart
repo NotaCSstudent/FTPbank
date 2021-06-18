@@ -1,4 +1,4 @@
-import 'package:client/Screens/SignUp/signup.dart';
+import 'signup.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
@@ -33,8 +33,9 @@ class _UserNameFieldState extends State<UserNameField> {
                 TextStyle(color: LightGrey.withOpacity(0.8), fontSize: 20),
             // fillColor: LightBlueAccent.withOpacity(0.2),
           ),
-          onFieldSubmitted: (String user) {
-            print("Saved Username: $user");
+          onFieldSubmitted: (String? username) {
+            print("Saved Username: $username");
+            // print(userNameFieldController.text);
           },
         ),
       ),
