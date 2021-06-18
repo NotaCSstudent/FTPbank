@@ -1,7 +1,7 @@
 import 'package:client/Screens/SignIn/signin.dart';
+import 'package:client/Screens/SignUp/signup.dart';
 import 'package:flutter/material.dart';
 
-import 'Screens/SignUp/signup.dart';
 import 'constants.dart';
 
 void main() {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         primaryColor: BackgroundColor,
         scaffoldBackgroundColor: BackgroundColor,
       ),
-      home: SafeArea(child: SignUp()),
+      home: SafeArea(child: Signin()),
     );
   }
 }

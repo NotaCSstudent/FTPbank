@@ -33,10 +33,10 @@ class Background extends StatelessWidget {
             child: IconButton(
               iconSize: 30,
               icon: Icon(
-                Icons.help_outline_rounded,
+                Icons.help_outline_rounded, // this is for the help button
                 color: LightBlueAccent,
               ),
-              onPressed: () {},
+              onPressed: () {}, // it should redirect to about
             ),
           ),
           child,

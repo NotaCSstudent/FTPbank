@@ -1,3 +1,4 @@
+import 'package:client/Screens/Fields/UserNameField.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants.dart';
@@ -17,21 +18,25 @@ class Signin extends StatelessWidget {
   }
 }
 
+final usernameFieldController = TextEditingController();
+final passwordFieldController = TextEditingController();
+
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size; // Size of the screen
+
     return Background(
       child: Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           LogoDark(size: size),
           const SizedBox(
             height: 75,
           ),
-          EmailField(),
+          UserNameField(),
           const SizedBox(
             height: 50,
           ),
@@ -49,6 +54,46 @@ class Body extends StatelessWidget {
   }
 }
 
+class SignInBttn extends StatelessWidget {
+  const SignInBttn({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 60,
+      width: 262,
+      child: TextButton(
+        style: TextButton.styleFrom(
+            padding: const EdgeInsets.all(15),
+            backgroundColor: MedBlueAccent.withOpacity(0.2),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+              side: BorderSide(
+                color: LightBlueAccent.withOpacity(0.2),
+              ),
+            )),
+        child: Text(
+          "Sign in",
+          style: TextStyle(
+            color: LightGrey.withOpacity(0.8),
+            fontSize: 26,
+          ),
+        ),
+        onPressed: () {
+          print("Username: ");
+          print(usernameFieldController.text);
+          print("Password: ");
+          print(passwordFieldController.text);
+
+          // send a request here through the tunnel with the credentials
+        },
+      ),
+    );
+  }
+}
+
 class ForgotPassText extends StatelessWidget {
   const ForgotPassText({
     Key? key,
@@ -57,6 +102,7 @@ class ForgotPassText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      // button if user forgets password
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
@@ -68,6 +114,7 @@ class ForgotPassText extends StatelessWidget {
         ),
       ),
       onTap: () {
+        // Currently nothing happens
         print("You forgot ur password");
       },
     );
@@ -82,6 +129,7 @@ class NewUserText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      // button for a user to make an account
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
@@ -94,80 +142,11 @@ class NewUserText extends StatelessWidget {
       ),
       onTap: () {
         Navigator.push(
-            context, PageRouteBuilder(pageBuilder: (_, __, ___) => SignUp()));
+            context,
+            PageRouteBuilder(
+                pageBuilder: (_, __, ___) =>
+                    SignUp())); // if the user is not registered go to the sign up page
       },
-    );
-  }
-}
-
-class SignInBttn extends StatelessWidget {
-  const SignInBttn({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 60,
-      width: 262,
-      child: TextButton(
-        style: TextButton.styleFrom(
-            padding: const EdgeInsets.all(15),
-            backgroundColor: MedBlueAccent.withOpacity(
-                0.2), //Color.fromRGBO(27, 63, 207, .2),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-              side: BorderSide(
-                color: LightBlueAccent.withOpacity(0.2),
-              ), //color: Color.fromRGBO(44, 190, 248, 0.1)
-            )),
-        child: Text(
-          "Sign in",
-          style: TextStyle(
-            color: LightGrey.withOpacity(0.8),
-            fontSize: 26,
-          ),
-        ),
-        onPressed: () {},
-      ),
-    );
-  }
-}
-
-class EmailField extends StatefulWidget {
-  const EmailField({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  _EmailFieldState createState() => _EmailFieldState();
-}
-
-class _EmailFieldState extends State<EmailField> {
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 60,
-      width: 262,
-      child: Container(
-        decoration: BoxDecoration(
-            color: LightBlueAccent.withOpacity(0.2),
-            borderRadius: BorderRadius.all(Radius.circular(15))),
-        child: TextFormField(
-          style: TextStyle(color: LightGrey.withOpacity(0.8), fontSize: 20),
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(15))),
-            labelText: 'Email...',
-            labelStyle:
-                TextStyle(color: LightGrey.withOpacity(0.8), fontSize: 20),
-            // fillColor: LightBlueAccent.withOpacity(0.2),
-          ),
-          onFieldSubmitted: (String email) {
-            print("Saved Email: $email");
-          },
-        ),
-      ),
     );
   }
 }
@@ -192,6 +171,7 @@ class _PasswordFieldState extends State<PasswordField> {
             color: LightBlueAccent.withOpacity(0.2),
             borderRadius: BorderRadius.all(Radius.circular(15))),
         child: TextFormField(
+          controller: passwordFieldController,
           obscureText: true,
           enableSuggestions: false,
           autocorrect: false,
@@ -202,7 +182,6 @@ class _PasswordFieldState extends State<PasswordField> {
             labelText: 'Password...',
             labelStyle:
                 TextStyle(color: LightGrey.withOpacity(0.8), fontSize: 20),
-            // fillColor: LightBlueAccent.withOpacity(0.2),
           ),
           onFieldSubmitted: (String pass) {
             print("Saved pass: $pass");
