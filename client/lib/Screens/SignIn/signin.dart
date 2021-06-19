@@ -1,3 +1,5 @@
+import 'package:google_fonts/google_fonts.dart';
+
 import 'UserNameField.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +22,7 @@ class Signin extends StatelessWidget {
 
 final userNameFieldController = TextEditingController();
 final passwordFieldController = TextEditingController();
+final formKey = GlobalKey<FormState>();
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
@@ -76,16 +79,19 @@ class SignInBttn extends StatelessWidget {
             )),
         child: Text(
           "Sign in",
-          style: TextStyle(
+          style: GoogleFonts.habibi(
+              textStyle: TextStyle(
             color: LightGrey.withOpacity(0.8),
             fontSize: 26,
-          ),
+          )),
         ),
         onPressed: () {
           print("Username: ");
           print(userNameFieldController.text);
           print("Password: ");
           print(passwordFieldController.text);
+          if (userformKey.currentState!.validate()) ;
+          if (formKey.currentState!.validate()) ;
 
           // send a request here through the tunnel with the credentials
         },
@@ -105,13 +111,13 @@ class ForgotPassText extends StatelessWidget {
       // button if user forgets password
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Text(
-          "Forgot Password?",
-          style: TextStyle(
-              color: LightGrey.withOpacity(0.8),
-              fontSize: 20,
-              decoration: TextDecoration.underline),
-        ),
+        child: Text("Forgot Password?",
+            style: GoogleFonts.habibi(
+              textStyle: TextStyle(
+                  color: LightGrey.withOpacity(0.8),
+                  fontSize: 20,
+                  decoration: TextDecoration.underline),
+            )),
       ),
       onTap: () {
         // Currently nothing happens
@@ -134,10 +140,11 @@ class NewUserText extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Text(
           "New here? Sign up!",
-          style: TextStyle(
-              color: LightGrey.withOpacity(0.8),
-              fontSize: 20,
-              decoration: TextDecoration.underline),
+          style: GoogleFonts.habibi(
+              textStyle: TextStyle(
+                  color: LightGrey.withOpacity(0.8),
+                  fontSize: 20,
+                  decoration: TextDecoration.underline)),
         ),
       ),
       onTap: () {
@@ -166,27 +173,41 @@ class _PasswordFieldState extends State<PasswordField> {
     return SizedBox(
       height: 60,
       width: 262,
-      child: Container(
-        decoration: BoxDecoration(
-            color: LightBlueAccent.withOpacity(0.2),
-            borderRadius: BorderRadius.all(Radius.circular(15))),
-        child: TextFormField(
-          controller: passwordFieldController,
-          obscureText: true,
-          enableSuggestions: false,
-          autocorrect: false,
-          style: TextStyle(color: LightGrey.withOpacity(0.8), fontSize: 20),
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(15))),
-            labelText: 'Password...',
-            labelStyle:
-                TextStyle(color: LightGrey.withOpacity(0.8), fontSize: 20),
+      child: Form(
+        key: formKey,
+        child: Container(
+          decoration: BoxDecoration(
+              color: LightBlueAccent.withOpacity(0.2),
+              borderRadius: BorderRadius.all(Radius.circular(15))),
+          child: TextFormField(
+            controller: passwordFieldController,
+            obscureText: true,
+            enableSuggestions: false,
+            autocorrect: false,
+            style: GoogleFonts.habibi(
+                textStyle: TextStyle(
+              color: LightGrey.withOpacity(0.8),
+              fontSize: 20,
+            )),
+            decoration: InputDecoration(
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15))),
+                labelText: 'Password...',
+                labelStyle: GoogleFonts.habibi(
+                  textStyle: TextStyle(
+                      color: LightGrey.withOpacity(0.8), fontSize: 20),
+                )),
+            onSaved: (String? pass) {
+              print("Saved pass: $pass");
+              // print(passwordFieldController.text);
+            },
+            validator: (pass) {
+              if (pass == null || pass.isEmpty) {
+                return "Password cannot be empty";
+              } // here we also need to add the database validation stuff
+              return null;
+            },
           ),
-          onSaved: (String? pass) {
-            print("Saved pass: $pass");
-            // print(passwordFieldController.text);
-          },
         ),
       ),
     );
