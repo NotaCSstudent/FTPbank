@@ -14,8 +14,6 @@ class UserNameField extends StatefulWidget {
   _UserNameFieldState createState() => _UserNameFieldState();
 }
 
-final userformKey = GlobalKey<FormState>();
-
 class _UserNameFieldState extends State<UserNameField> {
   @override
   Widget build(BuildContext context) {
@@ -23,7 +21,6 @@ class _UserNameFieldState extends State<UserNameField> {
       height: 60,
       width: 262,
       child: Form(
-        key: userformKey,
         child: Container(
           decoration: BoxDecoration(
               color: LightBlueAccent.withOpacity(0.2),

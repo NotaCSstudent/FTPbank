@@ -24,7 +24,6 @@ final userNameFieldController = TextEditingController();
 final emailFieldController = TextEditingController();
 final passwordFieldController = TextEditingController();
 final passwordFieldConfirmController = TextEditingController();
-final _formKey = GlobalKey<FormState>();
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
@@ -40,7 +39,18 @@ class Body extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          FieldsForm(),
+          UserNameField(),
+          const SizedBox(
+            height: 40,
+          ),
+          EmailField(),
+          const SizedBox(
+            height: 40,
+          ),
+          PasswordField(),
+          SizedBox(height: 40),
+          ConfirmPasswordField(),
+          SizedBox(height: 20),
           ExistingUserText(),
           SizedBox(
             height: 20,
@@ -78,24 +88,69 @@ class SignUpBttn extends StatelessWidget {
           style: GoogleFonts.habibi(
             textStyle: TextStyle(
               color: LightGrey.withOpacity(0.8),
-              fontSize: 26,
+              fontSize: 24,
             ),
           ),
         ),
         onPressed: () {
           print(userNameFieldController.text); // check if this exists already
-          if (userformKey.currentState!.validate())
-            ; //this will print an error message if the email doesnt meet Regex
+          //this will print an error message if the email doesnt meet Regex
+          if (userNameFieldController.text.length == 0 ||
+              emailFieldController.text.length == 0 ||
+              passwordFieldController.text.length == 0 ||
+              passwordFieldConfirmController.text.length == 0) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              backgroundColor: DarkBlueAccent,
+              behavior: SnackBarBehavior.floating,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+                side: BorderSide(
+                  color: LightBlueAccent.withOpacity(0.2),
+                ),
+              ),
+              padding: EdgeInsets.all(8),
+              content: Text(
+                "Fields cannot be empty",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.habibi(
+                  textStyle: TextStyle(
+                    color: LightGrey.withOpacity(0.8),
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+            ));
+          }
           print(emailFieldController.text); // check if this email is taken
-          if (emailformKey.currentState!.validate())
-            ; // this will print an error message if the email doesnt meet Regex
+          ; // this will print an error message if the email doesnt meet Regex
 
-          if (_formKey.currentState!.validate()) ;
           if (passwordFieldController.text ==
               passwordFieldConfirmController.text)
             print(
                 "Password is the same"); // proceed to encryption and storing the data
           else {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              backgroundColor: DarkBlueAccent,
+              behavior: SnackBarBehavior.floating,
+              // width: ,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+                side: BorderSide(
+                  color: LightBlueAccent.withOpacity(0.2),
+                ),
+              ),
+              padding: EdgeInsets.all(8),
+              content: Text(
+                "Passwords do not match",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.habibi(
+                  textStyle: TextStyle(
+                    color: LightGrey.withOpacity(0.8),
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+            ));
             print("Password not the same"); // request password again
             passwordFieldController.clear(); // clears password
             passwordFieldConfirmController.clear(); // clears password2
@@ -157,35 +212,37 @@ class _PasswordFieldState extends State<PasswordField> {
         decoration: BoxDecoration(
             color: LightBlueAccent.withOpacity(0.2),
             borderRadius: BorderRadius.all(Radius.circular(15))),
-        child: TextFormField(
-            controller: passwordFieldController,
-            obscureText: true,
-            enableSuggestions: false,
-            autocorrect: false,
-            style: GoogleFonts.habibi(
-              textStyle:
-                  TextStyle(color: LightGrey.withOpacity(0.8), fontSize: 20),
-            ),
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15))),
-              labelText: 'Password...',
-              labelStyle: GoogleFonts.habibi(
+        child: Form(
+          child: TextFormField(
+              controller: passwordFieldController,
+              obscureText: true,
+              enableSuggestions: false,
+              autocorrect: false,
+              style: GoogleFonts.habibi(
                 textStyle:
                     TextStyle(color: LightGrey.withOpacity(0.8), fontSize: 20),
-                // fillColor: LightBlueAccent.withOpacity(0.2),
               ),
-            ),
-            onSaved: (String? pass) {
-              print("Saved pass: $pass");
-              // print(passwordFieldController.text);
-            },
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return "Password cannot be empty";
-              }
-              return null;
-            }),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15))),
+                labelText: 'Password...',
+                labelStyle: GoogleFonts.habibi(
+                  textStyle: TextStyle(
+                      color: LightGrey.withOpacity(0.8), fontSize: 20),
+                  // fillColor: LightBlueAccent.withOpacity(0.2),
+                ),
+              ),
+              onSaved: (String? pass) {
+                print("Saved pass: $pass");
+                // print(passwordFieldController.text);
+              },
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "Password cannot be empty";
+                }
+                return null;
+              }),
+        ),
       ),
     );
   }
@@ -210,73 +267,42 @@ class _ConfirmPasswordFieldState extends State<ConfirmPasswordField> {
         decoration: BoxDecoration(
             color: LightBlueAccent.withOpacity(0.2),
             borderRadius: BorderRadius.all(Radius.circular(15))),
-        child: TextFormField(
-          controller: passwordFieldConfirmController,
-          obscureText: true,
-          enableSuggestions: false,
-          autocorrect: false,
-          style: GoogleFonts.habibi(
-            textStyle: TextStyle(
-              color: LightGrey.withOpacity(0.8),
-              fontSize: 20,
+        child: Form(
+          child: TextFormField(
+            controller: passwordFieldConfirmController,
+            obscureText: true,
+            enableSuggestions: false,
+            autocorrect: false,
+            style: GoogleFonts.habibi(
+              textStyle: TextStyle(
+                color: LightGrey.withOpacity(0.8),
+                fontSize: 20,
+              ),
             ),
-          ),
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(15))),
-            labelText: 'Confirm Password...',
-            labelStyle: GoogleFonts.habibi(
-              textStyle:
-                  TextStyle(color: LightGrey.withOpacity(0.8), fontSize: 20),
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15))),
+              labelText: 'Confirm Password...',
+              labelStyle: GoogleFonts.habibi(
+                textStyle:
+                    TextStyle(color: LightGrey.withOpacity(0.8), fontSize: 20),
+              ),
             ),
+            onSaved: (String? pass) {
+              print("Saved pass: $pass");
+              // print(passwordFieldConfirmController.text);
+            },
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "Password cannot be empty";
+              } else if (value != passwordFieldController.text) {
+                return "Passwords must match";
+              }
+              return null;
+            },
           ),
-          onSaved: (String? pass) {
-            print("Saved pass: $pass");
-            // print(passwordFieldConfirmController.text);
-          },
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return "Password cannot be empty";
-            } else if (value != passwordFieldController.text) {
-              return "Passwords must match";
-            }
-            return null;
-          },
         ),
       ),
     );
-  }
-}
-
-class FieldsForm extends StatefulWidget {
-  const FieldsForm({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  _FieldsFormstate createState() => _FieldsFormstate();
-}
-
-class _FieldsFormstate extends State<FieldsForm> {
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            UserNameField(),
-            const SizedBox(
-              height: 40,
-            ),
-            EmailField(),
-            const SizedBox(
-              height: 40,
-            ),
-            PasswordField(),
-            SizedBox(height: 40),
-            ConfirmPasswordField(),
-            SizedBox(height: 20),
-          ],
-        ));
   }
 }

@@ -22,7 +22,6 @@ class Signin extends StatelessWidget {
 
 final userNameFieldController = TextEditingController();
 final passwordFieldController = TextEditingController();
-final formKey = GlobalKey<FormState>();
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
@@ -82,7 +81,7 @@ class SignInBttn extends StatelessWidget {
           style: GoogleFonts.habibi(
               textStyle: TextStyle(
             color: LightGrey.withOpacity(0.8),
-            fontSize: 26,
+            fontSize: 24,
           )),
         ),
         onPressed: () {
@@ -90,9 +89,30 @@ class SignInBttn extends StatelessWidget {
           print(userNameFieldController.text);
           print("Password: ");
           print(passwordFieldController.text);
-          if (userformKey.currentState!.validate()) ;
-          if (formKey.currentState!.validate()) ;
-
+          if (userNameFieldController.text.length == 0 ||
+              passwordFieldController.text.length == 0) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              backgroundColor: DarkBlueAccent,
+              behavior: SnackBarBehavior.floating,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+                side: BorderSide(
+                  color: LightBlueAccent.withOpacity(0.2),
+                ),
+              ),
+              padding: EdgeInsets.all(8),
+              content: Text(
+                "Fields cannot be empty",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.habibi(
+                  textStyle: TextStyle(
+                    color: LightGrey.withOpacity(0.8),
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+            ));
+          }
           // send a request here through the tunnel with the credentials
         },
       ),
@@ -174,7 +194,6 @@ class _PasswordFieldState extends State<PasswordField> {
       height: 60,
       width: 262,
       child: Form(
-        key: formKey,
         child: Container(
           decoration: BoxDecoration(
               color: LightBlueAccent.withOpacity(0.2),

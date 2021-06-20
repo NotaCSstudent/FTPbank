@@ -14,8 +14,6 @@ class EmailField extends StatefulWidget {
   _EmailFieldState createState() => _EmailFieldState();
 }
 
-final emailformKey = GlobalKey<FormState>();
-
 class _EmailFieldState extends State<EmailField> {
   @override
   Widget build(BuildContext context) {
@@ -23,7 +21,6 @@ class _EmailFieldState extends State<EmailField> {
       height: 60,
       width: 262,
       child: Form(
-        key: emailformKey,
         child: Container(
           decoration: BoxDecoration(
               color: LightBlueAccent.withOpacity(0.2),
@@ -48,7 +45,7 @@ class _EmailFieldState extends State<EmailField> {
             },
             validator: (email) {
               if (email == null || email.isEmpty) {
-                return "Username cannot be empty";
+                return "Email cannot be empty";
               }
               return null;
             },
