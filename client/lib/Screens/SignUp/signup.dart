@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cryptography/cryptography.dart';
+import 'package:crypto/crypto.dart';
+import 'dart:convert';
 
 import '../SignIn/signin.dart';
 import '../../constants.dart';
@@ -93,8 +98,6 @@ class SignUpBttn extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          print(userNameFieldController.text); // check if this exists already
-          //this will print an error message if the email doesnt meet Regex
           if (userNameFieldController.text.length == 0 ||
               emailFieldController.text.length == 0 ||
               passwordFieldController.text.length == 0 ||
@@ -120,15 +123,8 @@ class SignUpBttn extends StatelessWidget {
                 ),
               ),
             ));
-          }
-          print(emailFieldController.text); // check if this email is taken
-          ; // this will print an error message if the email doesnt meet Regex
-
-          if (passwordFieldController.text ==
-              passwordFieldConfirmController.text)
-            print(
-                "Password is the same"); // proceed to encryption and storing the data
-          else {
+          } else if (passwordFieldController.text !=
+              passwordFieldConfirmController.text) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               backgroundColor: DarkBlueAccent,
               behavior: SnackBarBehavior.floating,
@@ -154,6 +150,16 @@ class SignUpBttn extends StatelessWidget {
             print("Password not the same"); // request password again
             passwordFieldController.clear(); // clears password
             passwordFieldConfirmController.clear(); // clears password2
+          } else {
+            print(emailFieldController
+                .text); // check if this email is taken in DB
+            print(userNameFieldController.text); // Check if useranme is in use
+            // this will print an error message if the email doesnt meet Regex, maybe can do it right before checking db
+            print(passwordFieldController
+                .text); // we will have to also do regex on this, then encrypt it and send it to db
+            print(hash(passwordFieldController.text));
+            print(passwordFieldConfirmController.text);
+            print(hash(passwordFieldConfirmController.text));
           }
         },
       ),
@@ -305,4 +311,10 @@ class _ConfirmPasswordFieldState extends State<ConfirmPasswordField> {
       ),
     );
   }
+}
+
+String hash(String pass) {
+  var encoded = utf8.encode(pass);
+  var out = sha512.convert(encoded);
+  return out.toString();
 }

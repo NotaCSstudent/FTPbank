@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:crypto/crypto.dart';
+import 'dart:convert';
 
 import 'UserNameField.dart';
-import 'package:flutter/material.dart';
-
 import '../../constants.dart';
 import '../SignUp/signup.dart';
 import 'LogoDark.dart';
@@ -85,10 +86,6 @@ class SignInBttn extends StatelessWidget {
           )),
         ),
         onPressed: () {
-          print("Username: ");
-          print(userNameFieldController.text);
-          print("Password: ");
-          print(passwordFieldController.text);
           if (userNameFieldController.text.length == 0 ||
               passwordFieldController.text.length == 0) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -112,6 +109,14 @@ class SignInBttn extends StatelessWidget {
                 ),
               ),
             ));
+          } else {
+            print("Username: ");
+            print(userNameFieldController.text);
+            print("Password: ");
+            print(passwordFieldController.text);
+            print(hash(passwordFieldController.text));
+            // if password exists, go to the next screen
+            // else, return error like above stating password or email are incorrect
           }
           // send a request here through the tunnel with the credentials
         },
@@ -231,4 +236,10 @@ class _PasswordFieldState extends State<PasswordField> {
       ),
     );
   }
+}
+
+String hash(String pass) {
+  var encoded = utf8.encode(pass);
+  var out = sha512.convert(encoded);
+  return out.toString();
 }
