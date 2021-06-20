@@ -1,10 +1,6 @@
-import 'dart:convert';
-
+import 'package:client/hash.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:cryptography/cryptography.dart';
-import 'package:crypto/crypto.dart';
-import 'dart:convert';
 
 import '../SignIn/signin.dart';
 import '../../constants.dart';
@@ -311,10 +307,4 @@ class _ConfirmPasswordFieldState extends State<ConfirmPasswordField> {
       ),
     );
   }
-}
-
-String hash(String pass) {
-  var encoded = utf8.encode(pass);
-  var out = sha512.convert(encoded);
-  return out.toString();
 }

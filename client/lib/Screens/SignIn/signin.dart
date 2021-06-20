@@ -1,7 +1,6 @@
+import 'package:client/hash.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:crypto/crypto.dart';
-import 'dart:convert';
 
 import 'UserNameField.dart';
 import '../../constants.dart';
@@ -236,10 +235,4 @@ class _PasswordFieldState extends State<PasswordField> {
       ),
     );
   }
-}
-
-String hash(String pass) {
-  var encoded = utf8.encode(pass);
-  var out = sha512.convert(encoded);
-  return out.toString();
 }
