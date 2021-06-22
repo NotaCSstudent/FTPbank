@@ -3,7 +3,7 @@ from pymongo import collection
 from pymongo import database
 from pymongo.mongo_client import MongoClient
 
-client = pymongo.MongoClient('mongodb+srv://<NAME>:<PASSWORD>@cluster0.bxtpa.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+client = pymongo.MongoClient('mongodb+srv://<NAME>:<PASS>@cluster0.bxtpa.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
 
 data = client["FTP_DB"]
 userpass = data['userpass']
@@ -35,6 +35,3 @@ def Find_User(name : str, password : str) -> bool:
     else:
         return False
 
-
-t = Find_User('embee','1234')
-print(t)

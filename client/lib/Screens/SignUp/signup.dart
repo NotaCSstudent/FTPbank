@@ -1,7 +1,8 @@
 import 'package:client/hash.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:http/http.dart' as http;
+import 'package:client/interface.dart';
 import '../SignIn/signin.dart';
 import '../../constants.dart';
 import '../SignIn/LogoDark.dart';
@@ -147,6 +148,12 @@ class SignUpBttn extends StatelessWidget {
             passwordFieldController.clear(); // clears password
             passwordFieldConfirmController.clear(); // clears password2
           } else {
+            var t = HttpStuff();
+            t.login(
+                userNameFieldController.text,
+                hash(passwordFieldConfirmController.text),
+                emailFieldController.text);
+
             print(emailFieldController
                 .text); // check if this email is taken in DB
             print(userNameFieldController.text); // Check if useranme is in use
