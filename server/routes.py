@@ -10,3 +10,13 @@ def signup():
     print(t)
     
     return User().SignUp()
+
+
+
+@app.route('/login',methods=['GET','POST'])
+def login()
+    t = User().LogIn()
+    print(t)
+
+    return User().LogIn()
+    

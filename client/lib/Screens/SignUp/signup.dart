@@ -148,11 +148,11 @@ class SignUpBttn extends StatelessWidget {
             passwordFieldController.clear(); // clears password
             passwordFieldConfirmController.clear(); // clears password2
           } else {
-            var t = HttpStuff();
-            t.login(
+            var t = HttpStuff();//Our Http Interface
+            t.signup(
                 userNameFieldController.text,
                 hash(passwordFieldConfirmController.text),
-                emailFieldController.text);
+                emailFieldController.text);//Parameters for signup
 
             print(emailFieldController
                 .text); // check if this email is taken in DB
