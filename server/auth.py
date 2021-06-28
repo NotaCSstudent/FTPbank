@@ -1,11 +1,16 @@
 import pymongo
-from pymongo import collection
-from pymongo import database
-from pymongo.mongo_client import MongoClient
+import dns
+import os
+from dotenv import load_dotenv
 
-client = pymongo.MongoClient('mongodb+srv://<NAME>:<PASS>@cluster0.bxtpa.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+load_dotenv()
 
-data = client["FTP_DB"]
+Mongo_URI = os.getenv('dburi')
+client = pymongo.MongoClient(Mongo_URI)
+
+# client = pymongo.MongoClient('mongodb+srv://<NAME>:<PASS>@cluster0.bxtpa.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+
+data = client.get_database("FTP_DB")
 userpass = data['userpass']
 
 g = userpass.find_one({'user':'embee'})

@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import Blueprint
-import autehntication as au
+import auth as au
 import json
 import flask
 

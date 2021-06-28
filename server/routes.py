@@ -14,7 +14,7 @@ def signup():
 
 
 @app.route('/login',methods=['GET','POST'])
-def login()
+def login():
     t = User().LogIn()
     print(t)
 
