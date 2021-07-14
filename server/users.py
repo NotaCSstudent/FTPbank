@@ -5,36 +5,44 @@ import uuid
 
 class User:
     def SignUp(self):
-        print(request.form)
+        print("Information sent to sign up:\t", request.form)
         user = {
             "_id": uuid.uuid4().hex,
             "username": request.form.get('username'),
             "email": request.form.get('email'),
             "password": request.form.get('password')
         }
-        if db.userpass.find_one({"email": user["email"]}):
+        if db.userpass.find_one({"email": user["email"]}) or db.userpass.find_one({"username": user["username"]}):
+            print("This username or email already exist\n")
             return jsonify({"error": "Sorry, this email is already in use"}), 400
         else:
             db.userpass.insert_one(
                 {"_id": user["_id"],
-                 "username": user["username"],
-                 "email": user["email"],
+                 "username": user["username"].lower(),
+                 "email": user["email"].lower(),
                  "password": user["password"]
                  }
             )
+            print("User has been added to database!\n")
+            return jsonify({"Success": "You have been added into our system"}), 200
 
     def LogIn(self):
-        print(request.form)
+        print("Information sent to login:\t",request.form)
         user = {
 
-            "email": request.form.get('email'),
+            "username": request.form.get('user'),
             "password": request.form.get('password')
         }
-        Validate = db.userpass.find_one({"email": user["email"]})
-        if(Validate == None):
+        validate = db.userpass.find_one({"username": user["username"]})
+        if(validate == None):
+            print("Username not found!\n")
             return jsonify({"error": "Wrong Email or Password"}), 400
         else:
-            if(Validate["password"] == user["password"] and Validate["email"] == user["email"]):
-                return jsonify({"Success": "You have logged into our system"}), 400
+            print("FOUND IT\n")
+            if(validate["password"] == user["password"] and validate["username"] == user["username"].lower()):
+                print("Valid username and pass!\n")
+                return jsonify({"Success": "You have logged into our system"}), 200
             else:
+                print("Wrong user or pass\n")
                 return jsonify({"error": "Wrong Email or Password"}), 400
+

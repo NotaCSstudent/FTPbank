@@ -6,8 +6,8 @@ from users import User
 
 @app.route('/signup', methods=['GET','POST'])
 def signup():
-    t = User().SignUp()
-    print(t)
+    # t = User().SignUp()
+    # print(t)
     
     return User().SignUp()
 
@@ -15,8 +15,8 @@ def signup():
 
 @app.route('/login',methods=['GET','POST'])
 def login():
-    t = User().LogIn()
-    print(t)
+    # t = User().LogIn()
+    # print(t)
 
     return User().LogIn()
     
