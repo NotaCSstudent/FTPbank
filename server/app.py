@@ -1,5 +1,5 @@
-from flask import Flask
-from flask import Blueprint
+from flask import Flask, Blueprint
+from flask_cors import CORS
 import auth as au
 import json
 import flask
@@ -9,6 +9,7 @@ import flask
 
 
 app = Flask(__name__)
+CORS(app)
 
 
 

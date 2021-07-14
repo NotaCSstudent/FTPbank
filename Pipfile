@@ -10,6 +10,7 @@ pymongo = "*"
 python-dotenv = "*"
 dnspython = "*"
 jsonify = "*"
+flask-cors = "*"
 
 [dev-packages]
 
