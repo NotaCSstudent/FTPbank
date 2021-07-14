@@ -9,6 +9,7 @@ import '../SignIn/LogoDark.dart';
 import 'EmailField.dart';
 import 'UserNameField.dart';
 import 'background.dart';
+import 'signupbtn.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -59,112 +60,6 @@ class Body extends StatelessWidget {
           ),
           SignUpBttn(),
         ],
-      ),
-    );
-  }
-}
-
-class SignUpBttn extends StatelessWidget {
-  const SignUpBttn({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 60,
-      width: 262,
-      child: TextButton(
-        style: TextButton.styleFrom(
-            padding: const EdgeInsets.all(15),
-            backgroundColor: MedBlueAccent.withOpacity(
-                0.2), //Color.fromRGBO(27, 63, 207, .2),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-              side: BorderSide(
-                color: LightBlueAccent.withOpacity(0.2),
-              ), //color: Color.fromRGBO(44, 190, 248, 0.1)
-            )),
-        child: Text(
-          "Sign up",
-          style: GoogleFonts.habibi(
-            textStyle: TextStyle(
-              color: LightGrey.withOpacity(0.8),
-              fontSize: 24,
-            ),
-          ),
-        ),
-        onPressed: () {
-          if (userNameFieldController.text.length == 0 ||
-              emailFieldController.text.length == 0 ||
-              passwordFieldController.text.length == 0 ||
-              passwordFieldConfirmController.text.length == 0) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              backgroundColor: DarkBlueAccent,
-              behavior: SnackBarBehavior.floating,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-                side: BorderSide(
-                  color: LightBlueAccent.withOpacity(0.2),
-                ),
-              ),
-              padding: EdgeInsets.all(8),
-              content: Text(
-                "Fields cannot be empty",
-                textAlign: TextAlign.center,
-                style: GoogleFonts.habibi(
-                  textStyle: TextStyle(
-                    color: LightGrey.withOpacity(0.8),
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-            ));
-          } else if (passwordFieldController.text !=
-              passwordFieldConfirmController.text) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              backgroundColor: DarkBlueAccent,
-              behavior: SnackBarBehavior.floating,
-              // width: ,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-                side: BorderSide(
-                  color: LightBlueAccent.withOpacity(0.2),
-                ),
-              ),
-              padding: EdgeInsets.all(8),
-              content: Text(
-                "Passwords do not match",
-                textAlign: TextAlign.center,
-                style: GoogleFonts.habibi(
-                  textStyle: TextStyle(
-                    color: LightGrey.withOpacity(0.8),
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-            ));
-            print("Password not the same"); // request password again
-            passwordFieldController.clear(); // clears password
-            passwordFieldConfirmController.clear(); // clears password2
-          } else {
-            var t = HttpStuff();//Our Http Interface
-            t.signup(
-                userNameFieldController.text,
-                hash(passwordFieldConfirmController.text),
-                emailFieldController.text);//Parameters for signup
-
-            print(emailFieldController
-                .text); // check if this email is taken in DB
-            print(userNameFieldController.text); // Check if useranme is in use
-            // this will print an error message if the email doesnt meet Regex, maybe can do it right before checking db
-            print(passwordFieldController
-                .text); // we will have to also do regex on this, then encrypt it and send it to db
-            print(hash(passwordFieldController.text));
-            print(passwordFieldConfirmController.text);
-            print(hash(passwordFieldConfirmController.text));
-          }
-        },
       ),
     );
   }

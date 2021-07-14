@@ -38,15 +38,15 @@ class _UserNameFieldState extends State<UserNameField> {
                   textStyle: TextStyle(
                       color: LightGrey.withOpacity(0.8), fontSize: 20)),
             ),
-            onFieldSubmitted: (String? username) {
-              print("Saved Username: $username");
-            },
-            validator: (user) {
-              if (user == null || user.isEmpty) {
-                return "Username cannot be empty";
-              }
-              return null;
-            },
+            // onFieldSubmitted: (String? username) {
+            //   print("Saved Username: $username");
+            // },
+            // validator: (user) {
+            //   if (user == null || user.isEmpty) {
+            //     return "Username cannot be empty";
+            //   }
+            //   return null;
+            // },
           ),
         ),
       ),

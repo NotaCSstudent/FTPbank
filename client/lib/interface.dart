@@ -8,7 +8,7 @@ class HttpStuff {
   ///Uses the http client from the http library
 
   var signUP = Uri.parse(
-      'http://127.0.0.1:5000/signup'); //Parses the flask url and gets data
+      'http://192.168.1.11:5000/signup'); //Parses the flask url and gets data
 
   signup(user, pass, email) async {
     http.Response response = await client.post(signUP, body: {
@@ -19,21 +19,32 @@ class HttpStuff {
 
     if (response.statusCode == 200) {
       print(convert.jsonDecode(response.body));
-      print('Testing');
+      print("FLUTTER SIGN UP ALL GOOD!");
+      return true;
+    } else if (response.statusCode == 400) {
+      print(convert.jsonDecode(response.body));
+      print("FLUTTER SIGN UP ALL BAD!");
+      return false;
     }
   }
 
-  var logIn = Uri.parse('http://127.0.0.1:5000/login');
+  var logIn = Uri.parse('http://192.168.1.11:5000/login');
 
-  login(pass, email) async {
-    http.Response response = await client.post(signUP, body: {
-      'email': email,
+  login(user, pass) async {
+    http.Response response = await client.post(logIn, body: {
+      'user': user,
       'password': pass,
     });
 
     if (response.statusCode == 200) {
       //If 200 we get into the page
       print(convert.jsonDecode(response.body));
+      print("FLUTTER SIGN IN ALL GOOD!");
+      return true;
+    } else if (response.statusCode == 400) {
+      print(convert.jsonDecode(response.body));
+      print("FLUTTER SIGN IN ALL BAD!");
+      return false;
     }
   }
 }
