@@ -8,7 +8,7 @@ class HttpStuff {
   ///Uses the http client from the http library
 
   var signUP = Uri.parse(
-      'http://192.168.1.11:5000/signup'); //Parses the flask url and gets data
+      'http://172.25.115.217:5000/signup'); //Parses the flask url and gets data
 
   signup(user, pass, email) async {
     http.Response response = await client.post(signUP, body: {
@@ -28,7 +28,7 @@ class HttpStuff {
     }
   }
 
-  var logIn = Uri.parse('http://192.168.1.11:5000/login');
+  var logIn = Uri.parse('http://172.25.115.217:5000/login');
 
   login(user, pass) async {
     http.Response response = await client.post(logIn, body: {
