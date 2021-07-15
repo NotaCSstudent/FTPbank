@@ -33,6 +33,7 @@ class SignUpBttn extends StatelessWidget {
             textStyle: TextStyle(
               color: LightGrey.withOpacity(0.8),
               fontSize: 24,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),
@@ -114,7 +115,7 @@ class SignUpBttn extends StatelessWidget {
                 ),
                 padding: EdgeInsets.all(8),
                 content: Text(
-                  "Username or email is already exists",
+                  "Username or email already exist",
                   textAlign: TextAlign.center,
                   style: GoogleFonts.habibi(
                     textStyle: TextStyle(

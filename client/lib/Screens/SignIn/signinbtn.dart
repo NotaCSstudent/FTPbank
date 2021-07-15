@@ -33,6 +33,7 @@ class SignInBttn extends StatelessWidget {
               textStyle: TextStyle(
             color: LightGrey.withOpacity(0.8),
             fontSize: 24,
+            fontWeight: FontWeight.bold,
           )),
         ),
         onPressed: () async {

@@ -76,6 +76,7 @@ class ForgotPassText extends StatelessWidget {
               textStyle: TextStyle(
                   color: LightGrey.withOpacity(0.8),
                   fontSize: 20,
+                  fontWeight: FontWeight.bold,
                   decoration: TextDecoration.underline),
             )),
       ),
@@ -104,6 +105,7 @@ class NewUserText extends StatelessWidget {
               textStyle: TextStyle(
                   color: LightGrey.withOpacity(0.8),
                   fontSize: 20,
+                  fontWeight: FontWeight.bold,
                   decoration: TextDecoration.underline)),
         ),
       ),
@@ -151,10 +153,20 @@ class _PasswordFieldState extends State<PasswordField> {
             decoration: InputDecoration(
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(15))),
+                prefixIcon: Padding(
+                  padding: const EdgeInsetsDirectional.only(start: 8.0),
+                  child: Icon(
+                    Icons.lock_outline_rounded, // this is for the help button
+                    color: LightBlueAccent,
+                  ),
+                ),
                 labelText: 'Password...',
                 labelStyle: GoogleFonts.habibi(
                   textStyle: TextStyle(
-                      color: LightGrey.withOpacity(0.8), fontSize: 20),
+                    color: LightGrey.withOpacity(0.8),
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 )),
             // validator: (pass) {
             //   if (pass == null || pass.isEmpty) {
