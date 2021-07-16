@@ -25,6 +25,8 @@ class SignUp extends StatelessWidget {
 
 final userNameFieldController = TextEditingController();
 final emailFieldController = TextEditingController();
+final NameFieldController = TextEditingController();
+
 final passwordFieldController = TextEditingController();
 final passwordFieldConfirmController = TextEditingController();
 
@@ -39,25 +41,28 @@ class Body extends StatelessWidget {
         // mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           LogoDark(size: size),
-          const SizedBox(
-            height: 10,
-          ),
+          // const SizedBox(
+          //   height: 10,
+          // ),
+          Spacer(),
           UserNameField(),
-          const SizedBox(
-            height: 40,
-          ),
+          // const SizedBox(
+          //   height: 40,
+          // ),
+          Spacer(),
           EmailField(),
-          const SizedBox(
-            height: 40,
-          ),
+          Spacer(),
+          NameField(),
+          Spacer(),
+
           PasswordField(),
-          SizedBox(height: 40),
+          Spacer(),
+
           ConfirmPasswordField(),
-          SizedBox(height: 20),
+          Spacer(),
           ExistingUserText(),
-          SizedBox(
-            height: 20,
-          ),
+          Spacer(),
+
           SignUpBttn(),
         ],
       ),
@@ -222,6 +227,68 @@ class _ConfirmPasswordFieldState extends State<ConfirmPasswordField> {
                 return "Password cannot be empty";
               } else if (value != passwordFieldController.text) {
                 return "Passwords must match";
+              }
+              return null;
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class NameField extends StatefulWidget {
+  const NameField({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  _NameField createState() => _NameField();
+}
+
+class _NameField extends State<NameField> {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 60,
+      width: 262,
+      child: Container(
+        decoration: BoxDecoration(
+            color: LightBlueAccent.withOpacity(0.2),
+            borderRadius: BorderRadius.all(Radius.circular(15))),
+        child: Form(
+          child: TextFormField(
+            controller: NameFieldController,
+            style: GoogleFonts.habibi(
+                textStyle:
+                    TextStyle(color: LightGrey.withOpacity(0.8), fontSize: 20)),
+            decoration: InputDecoration(
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15))),
+                prefixIcon: Padding(
+                  padding: const EdgeInsetsDirectional.only(start: 8.0),
+                  child: Icon(
+                    Icons.person_rounded, // this is for the help button
+                    color: LightBlueAccent,
+                  ),
+                ),
+                labelText: 'Name...',
+                labelStyle: GoogleFonts.habibi(
+                  textStyle: TextStyle(
+                    color: LightGrey.withOpacity(0.8),
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  // fillColor: LightBlueAccent.withOpacity(0.2),
+                )),
+            onSaved: (String? name) {
+              print("Saved Email: $name");
+
+              // print(emailFieldController.text);
+            },
+            validator: (name) {
+              if (name == null || name.isEmpty) {
+                return "Name cannot be empty";
               }
               return null;
             },

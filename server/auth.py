@@ -14,9 +14,9 @@ data = client.get_database("FTP_DB")## Access our collection
 userpass = data['userpass'] ## This is for authentication
 userinfo = data['userinfo'] ## The Users information
 
-g = userpass.find_one({'user':'embee'})
+test = {"user": "abc", "pass": "abc"}
 t = userpass.count_documents({})
-print("Find embee:\t", g)
+print("Test Login:\t", test)
 print("Number of docs in db:\t", t)
 print()
 
