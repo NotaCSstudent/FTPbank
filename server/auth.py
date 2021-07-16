@@ -13,9 +13,9 @@ client = pymongo.MongoClient(Mongo_URI)
 data = client.get_database("FTP_DB")
 userpass = data['userpass']
 
-g = userpass.find_one({'user':'embee'})
+test = {"user": "abc", "pass": "abc"}
 t = userpass.count_documents({})
-print("Find embee:\t", g)
+print("Test Login:\t", test)
 print("Number of docs in db:\t", t)
 print()
 

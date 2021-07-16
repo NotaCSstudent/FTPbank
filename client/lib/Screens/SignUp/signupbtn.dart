@@ -40,6 +40,7 @@ class SignUpBttn extends StatelessWidget {
         onPressed: () async {
           if (userNameFieldController.text.length == 0 ||
               emailFieldController.text.length == 0 ||
+              NameFieldController.text.length == 0 ||
               passwordFieldController.text.length == 0 ||
               passwordFieldConfirmController.text.length == 0) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -95,13 +96,20 @@ class SignUpBttn extends StatelessWidget {
             var status = await t.signup(
                 userNameFieldController.text,
                 hash(passwordFieldConfirmController.text),
-                emailFieldController.text); //Parameters for signup
+                emailFieldController.text,
+                NameFieldController.text); //Parameters for signup
             print("OUR STATUS FOR SIGN UP IS $status");
 
             // this will print an error message if the email doesnt meet Regex, maybe can do it right before checking db
             if (status == true) {
               Navigator.push(context,
                   PageRouteBuilder(pageBuilder: (_, __, ___) => MainScreen()));
+
+              userNameFieldController.clear();
+              emailFieldController.clear();
+              passwordFieldController.clear();
+              passwordFieldConfirmController.clear();
+              NameFieldController.clear();
             } else {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 backgroundColor: DarkBlueAccent,
