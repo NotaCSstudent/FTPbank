@@ -10,6 +10,7 @@ class User:
             "_id": uuid.uuid4().hex,
             "username": request.form.get('username'),
             "email": request.form.get('email'),
+            "name": request.form.get('name'),
             "password": request.form.get('password')
         }
         if db.userpass.find_one({"email": user["email"]}) or db.userpass.find_one({"username": user["username"]}):
@@ -20,6 +21,7 @@ class User:
                 {"_id": user["_id"],
                  "username": user["username"].lower(),
                  "email": user["email"].lower(),
+                 "name": user["name"],
                  "password": user["password"]
                  }
             )

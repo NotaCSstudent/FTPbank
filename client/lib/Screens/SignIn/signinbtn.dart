@@ -71,6 +71,8 @@ class SignInBttn extends StatelessWidget {
             if (status == true) {
               Navigator.push(context,
                   PageRouteBuilder(pageBuilder: (_, __, ___) => MainScreen()));
+              userNameFieldController.clear();
+              passwordFieldController.clear(); // clears password
             } else {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 backgroundColor: DarkBlueAccent,

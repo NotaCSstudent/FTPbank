@@ -10,11 +10,12 @@ class HttpStuff {
   var signUP = Uri.parse(
       'http://172.25.115.217:5000/signup'); //Parses the flask url and gets data
 
-  signup(user, pass, email) async {
+  signup(user, pass, email, name) async {
     http.Response response = await client.post(signUP, body: {
       'email': email,
       'password': pass,
       'username': user,
+      'name': name
     });
 
     if (response.statusCode == 200) {
