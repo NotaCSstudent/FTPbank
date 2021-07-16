@@ -10,8 +10,9 @@ client = pymongo.MongoClient(Mongo_URI)
 
 # client = pymongo.MongoClient('mongodb+srv://<NAME>:<PASS>@cluster0.bxtpa.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
 
-data = client.get_database("FTP_DB")
-userpass = data['userpass']
+data = client.get_database("FTP_DB")## Access our collection
+userpass = data['userpass'] ## This is for authentication
+userinfo = data['userinfo'] ## The Users information
 
 g = userpass.find_one({'user':'embee'})
 t = userpass.count_documents({})

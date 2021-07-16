@@ -4,6 +4,8 @@ import uuid
 
 
 class User:
+    def __init__(self):
+        self.IsLoggedIn = False
     def SignUp(self):
         print("Information sent to sign up:\t", request.form)
         user = {
@@ -41,8 +43,18 @@ class User:
             print("FOUND IT\n")
             if(validate["password"] == user["password"] and validate["username"] == user["username"].lower()):
                 print("Valid username and pass!\n")
+                self.IsLoggedIn = True
                 return jsonify({"Success": "You have logged into our system"}), 200
             else:
                 print("Wrong user or pass\n")
                 return jsonify({"error": "Wrong Email or Password"}), 400
+    
+    def UserPage(self):
+        if(self.IsLoggedIn == true):
+            return 200
+            
+        
+
+
+
 
