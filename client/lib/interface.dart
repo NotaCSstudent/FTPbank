@@ -8,7 +8,7 @@ class HttpStuff {
   ///Uses the http client from the http library
 
   var signUP = Uri.parse(
-      'http://172.25.115.217:5000/signup'); //Parses the flask url and gets data
+      'http://0.0.0.0:5000/signup'); //Parses the flask url and gets data
 
   signup(user, pass, email, name) async {
     http.Response response = await client.post(signUP, body: {
@@ -26,10 +26,13 @@ class HttpStuff {
       print(convert.jsonDecode(response.body));
       print("FLUTTER SIGN UP ALL BAD!");
       return false;
+    } else if (response.statusCode == 500) {
+      print("Uh oh network error");
+      return false;
     }
   }
 
-  var logIn = Uri.parse('http://172.25.115.217:5000/login');
+  var logIn = Uri.parse('http://0.0.0.0:5000/login');
 
   login(user, pass) async {
     http.Response response = await client.post(logIn, body: {

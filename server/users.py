@@ -27,6 +27,14 @@ class User:
                  "password": user["password"]
                  }
             )
+            db.userinfo.insert_one(
+                 {"_id": user["_id"],
+                 "username": user["username"].lower(),
+                 "email": user["email"].lower(),
+                 "name": user["name"],
+                 "password": user["password"]
+                 }
+            )
             print("User has been added to database!\n")
             return jsonify({"Success": "You have been added into our system"}), 200
 
@@ -51,9 +59,7 @@ class User:
                 print("Wrong user or pass\n")
                 return jsonify({"error": "Wrong Email or Password"}), 400
     
-    def UserPage(self):
-        if(self.IsLoggedIn == true):
-            return 200
+    
             
         
 

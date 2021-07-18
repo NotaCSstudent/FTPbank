@@ -16,9 +16,9 @@ userinfo = data['userinfo'] ## The Users information
 
 test = {"user": "abc", "pass": "abc"}
 t = userpass.count_documents({})
-print("Test Login:\t", test)
-print("Number of docs in db:\t", t)
-print()
+#print("Test Login:\t", test)
+#print("Number of docs in db:\t", t)
+#print()
 
 
 # def New_User(name :str,password : str) -> bool:
