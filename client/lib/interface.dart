@@ -2,13 +2,16 @@ import 'dart:convert' as convert;
 
 import 'package:http/http.dart' as http;
 
+String base_url =
+    "http://192.168.1.13:5000/"; // change this url when running flask server
+
 class HttpStuff {
   final client = http.Client();
 
   ///Uses the http client from the http library
 
-  var signUP = Uri.parse(
-      'http://0.0.0.0:5000/signup'); //Parses the flask url and gets data
+  var signUP =
+      Uri.parse(base_url + 'signup'); //Parses the flask url and gets data
 
   signup(user, pass, email, name) async {
     http.Response response = await client.post(signUP, body: {
@@ -32,7 +35,7 @@ class HttpStuff {
     }
   }
 
-  var logIn = Uri.parse('http://0.0.0.0:5000/login');
+  var logIn = Uri.parse(base_url + 'login');
 
   login(user, pass) async {
     http.Response response = await client.post(logIn, body: {
