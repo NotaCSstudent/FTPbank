@@ -1,3 +1,4 @@
+import 'package:client/Screens/SignIn/background.dart';
 import 'package:client/Screens/SignIn/signin.dart';
 import 'package:client/constants.dart';
 import 'package:flutter/material.dart';
@@ -162,14 +163,33 @@ class MainScreen extends StatelessWidget {
           ),
         ),
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.add_rounded,
-              color: PinkAccent,
-              size: 35,
-            ),
-          )
+          PopupMenuButton(
+              color: BackgroundColor.withOpacity(0.7),
+              icon: Icon(
+                Icons.add_rounded,
+                color: PinkAccent,
+                size: 35,
+              ),
+              itemBuilder: (context) => [
+                    PopupMenuItem(
+                      child: Text(
+                        "Add Card",
+                        style: GoogleFonts.habibi(
+                          textStyle: TextStyle(color: LightGrey, fontSize: 18),
+                        ),
+                      ),
+                      value: 0,
+                    ),
+                    PopupMenuItem(
+                      child: Text(
+                        "Add Transaction",
+                        style: GoogleFonts.habibi(
+                          textStyle: TextStyle(color: LightGrey, fontSize: 18),
+                        ),
+                      ),
+                      value: 2,
+                    )
+                  ])
         ],
       ),
       body: Container(
@@ -182,7 +202,32 @@ class MainScreen extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(left: 15, right: 15),
               alignment: FractionalOffset.center,
-            )
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.credit_card_rounded,
+                    color: LightBlueAccent,
+                    size: 25,
+                  ),
+                  Spacer(),
+                  Text(
+                    "Cards",
+                    style: GoogleFonts.habibi(
+                      textStyle: TextStyle(
+                          color: PinkAccent,
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // put cards here
+            //insights?
+            // then put the transactions
           ],
         ),
       ),
