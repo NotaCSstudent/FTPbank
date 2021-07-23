@@ -1,5 +1,8 @@
 import 'package:client/Screens/SignIn/background.dart';
 import 'package:client/Screens/SignIn/signin.dart';
+import 'package:client/Screens/SignIn/signinbtn.dart';
+import 'package:client/Screens/SignUp/signupbtn.dart';
+
 import 'package:client/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,7 +29,7 @@ class MainScreen extends StatelessWidget {
             children: <Widget>[
               DrawerHeader(
                   child: Text(
-                "test account",
+                "$users_name's account",
                 style: GoogleFonts.habibi(
                     textStyle: TextStyle(
                         color: LightBlueAccent,
@@ -154,7 +157,7 @@ class MainScreen extends StatelessWidget {
           ),
         ),
         title: Text(
-          "test Wallet",
+          "$users_name's Wallet",
           style: GoogleFonts.habibi(
             textStyle: TextStyle(
                 color: LightBlueAccent.withOpacity(0.8),

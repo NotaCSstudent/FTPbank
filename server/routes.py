@@ -19,4 +19,3 @@ def login():
     # print(t)
 
     return User().LogIn()
-    

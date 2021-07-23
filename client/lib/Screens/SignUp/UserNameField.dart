@@ -26,7 +26,7 @@ class _UserNameFieldState extends State<UserNameField> {
               color: LightBlueAccent.withOpacity(0.2),
               borderRadius: BorderRadius.all(Radius.circular(15))),
           child: TextFormField(
-            controller: userNameFieldController,
+            controller: new_userNameFieldController,
             style: GoogleFonts.habibi(
               textStyle:
                   TextStyle(color: LightGrey.withOpacity(0.8), fontSize: 20),

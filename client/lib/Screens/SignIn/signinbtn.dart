@@ -7,11 +7,12 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'signin.dart';
 
+String? users_name;
+
 class SignInBttn extends StatelessWidget {
   const SignInBttn({
     Key? key,
   }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -68,12 +69,7 @@ class SignInBttn extends StatelessWidget {
               hash(passwordFieldController.text),
             );
 
-            if (status == true) {
-              Navigator.push(context,
-                  PageRouteBuilder(pageBuilder: (_, __, ___) => MainScreen()));
-              userNameFieldController.clear();
-              passwordFieldController.clear(); // clears password
-            } else {
+            if (status == false) {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 backgroundColor: DarkBlueAccent,
                 behavior: SnackBarBehavior.floating,
@@ -96,6 +92,14 @@ class SignInBttn extends StatelessWidget {
                   ),
                 ),
               ));
+            } else {
+              users_name = status;
+              Navigator.push(context,
+                  PageRouteBuilder(pageBuilder: (_, __, ___) => MainScreen()));
+
+              userNameFieldController.clear();
+              passwordFieldController.clear(); // clears password
+
             }
           }
         },

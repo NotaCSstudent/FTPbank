@@ -1,4 +1,5 @@
 import 'package:client/Screens/Main/mainscreen.dart';
+import 'package:client/Screens/SignIn/signin.dart';
 import 'package:client/Screens/SignUp/signup.dart';
 import 'package:client/constants.dart';
 import 'package:client/hash.dart';
@@ -38,11 +39,11 @@ class SignUpBttn extends StatelessWidget {
           ),
         ),
         onPressed: () async {
-          if (userNameFieldController.text.length == 0 ||
+          if (new_userNameFieldController.text.length == 0 ||
               emailFieldController.text.length == 0 ||
               NameFieldController.text.length == 0 ||
-              passwordFieldController.text.length == 0 ||
-              passwordFieldConfirmController.text.length == 0) {
+              new_passwordFieldController.text.length == 0 ||
+              new_passwordFieldConfirmController.text.length == 0) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               backgroundColor: DarkBlueAccent,
               behavior: SnackBarBehavior.floating,
@@ -64,8 +65,8 @@ class SignUpBttn extends StatelessWidget {
                 ),
               ),
             ));
-          } else if (passwordFieldController.text !=
-              passwordFieldConfirmController.text) {
+          } else if (new_passwordFieldController.text !=
+              new_passwordFieldConfirmController.text) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               backgroundColor: DarkBlueAccent,
               behavior: SnackBarBehavior.floating,
@@ -89,28 +90,19 @@ class SignUpBttn extends StatelessWidget {
               ),
             ));
             print("Password not the same"); // request password again
-            passwordFieldController.clear(); // clears password
-            passwordFieldConfirmController.clear(); // clears password2
+            new_passwordFieldController.clear(); // clears password
+            new_passwordFieldConfirmController.clear(); // clears password2
           } else {
             var t = HttpStuff(); //Our Http Interface
             var status = await t.signup(
-                userNameFieldController.text,
-                hash(passwordFieldConfirmController.text),
+                new_userNameFieldController.text,
+                hash(new_passwordFieldController.text),
                 emailFieldController.text,
                 NameFieldController.text); //Parameters for signup
             print("OUR STATUS FOR SIGN UP IS $status");
 
             // this will print an error message if the email doesnt meet Regex, maybe can do it right before checking db
-            if (status == true) {
-              Navigator.push(context,
-                  PageRouteBuilder(pageBuilder: (_, __, ___) => MainScreen()));
-
-              userNameFieldController.clear();
-              emailFieldController.clear();
-              passwordFieldController.clear();
-              passwordFieldConfirmController.clear();
-              NameFieldController.clear();
-            } else {
+            if (status == false) {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 backgroundColor: DarkBlueAccent,
                 behavior: SnackBarBehavior.floating,
@@ -133,6 +125,16 @@ class SignUpBttn extends StatelessWidget {
                   ),
                 ),
               ));
+            } else {
+              // String name = NameFieldController.text;
+              Navigator.push(context,
+                  PageRouteBuilder(pageBuilder: (_, __, ___) => Signin()));
+
+              new_userNameFieldController.clear();
+              emailFieldController.clear();
+              new_passwordFieldController.clear();
+              new_passwordFieldConfirmController.clear();
+              NameFieldController.clear();
             }
           }
         },
