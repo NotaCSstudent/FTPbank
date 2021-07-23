@@ -111,10 +111,10 @@ class NewUserText extends StatelessWidget {
       ),
       onTap: () {
         Navigator.push(
-            context,
-            PageRouteBuilder(
-                pageBuilder: (_, __, ___) =>
-                    SignUp())); // if the user is not registered go to the sign up page
+            context, PageRouteBuilder(pageBuilder: (_, __, ___) => SignUp()));
+        userNameFieldController.clear();
+        passwordFieldController
+            .clear(); // clears password // if the user is not registered go to the sign up page
       },
     );
   }

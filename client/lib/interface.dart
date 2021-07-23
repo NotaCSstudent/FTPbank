@@ -3,7 +3,7 @@ import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 
 String base_url =
-    "http://192.168.1.2:5000/"; // change this url when running flask server
+    "http://127.0.0.1:5000/"; // change this url when running flask server
 
 class HttpStuff {
   final client = http.Client();
@@ -22,7 +22,8 @@ class HttpStuff {
     });
 
     if (response.statusCode == 200) {
-      print(convert.jsonDecode(response.body));
+      // var r = convert.jsonDecode(response.body);
+      // String name = r["name"];
       print("FLUTTER SIGN UP ALL GOOD!");
       return true;
     } else if (response.statusCode == 400) {
@@ -45,9 +46,10 @@ class HttpStuff {
 
     if (response.statusCode == 200) {
       //If 200 we get into the page
-      print(convert.jsonDecode(response.body));
+      var r = convert.jsonDecode(response.body);
+      String name = r["name"];
       print("FLUTTER SIGN IN ALL GOOD!");
-      return true;
+      return name;
     } else if (response.statusCode == 400) {
       print(convert.jsonDecode(response.body));
       print("FLUTTER SIGN IN ALL BAD!");

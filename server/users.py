@@ -51,14 +51,14 @@ class User:
             return jsonify({"error": "Wrong Email or Password"}), 400
         else:
             print("FOUND IT\n")
+            IsLoggedIn = True
             if(validate["password"] == user["password"] and validate["username"] == user["username"].lower()):
                 print("Valid username and pass!\n")
                 self.IsLoggedIn = True
-                return jsonify({"Success": "You have logged into our system"}), 200
+                return jsonify({"Success": "You have logged into our system", "name": validate["name"]}), 200
             else:
                 print("Wrong user or pass\n")
                 return jsonify({"error": "Wrong Email or Password"}), 400
-    
     
             
         

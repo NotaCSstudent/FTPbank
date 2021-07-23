@@ -23,12 +23,12 @@ class SignUp extends StatelessWidget {
   }
 }
 
-final userNameFieldController = TextEditingController();
+final new_userNameFieldController = TextEditingController();
 final emailFieldController = TextEditingController();
 final NameFieldController = TextEditingController();
 
-final passwordFieldController = TextEditingController();
-final passwordFieldConfirmController = TextEditingController();
+final new_passwordFieldController = TextEditingController();
+final new_passwordFieldConfirmController = TextEditingController();
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
@@ -95,9 +95,13 @@ class ExistingUserText extends StatelessWidget {
         Navigator.push(
             // this changes which page we go to
             context,
-            PageRouteBuilder(
-                pageBuilder: (_, __, ___) =>
-                    Signin())); // go to the sign in page instead if the user is registered already
+            PageRouteBuilder(pageBuilder: (_, __, ___) => Signin()));
+        new_userNameFieldController.clear();
+        emailFieldController.clear();
+        new_passwordFieldController.clear();
+        new_passwordFieldConfirmController.clear();
+        NameFieldController
+            .clear(); // go to the sign in page instead if the user is registered already
       },
     );
   }
@@ -124,7 +128,7 @@ class _PasswordFieldState extends State<PasswordField> {
             borderRadius: BorderRadius.all(Radius.circular(15))),
         child: Form(
           child: TextFormField(
-              controller: passwordFieldController,
+              controller: new_passwordFieldController,
               obscureText: true,
               enableSuggestions: false,
               autocorrect: false,
@@ -189,7 +193,7 @@ class _ConfirmPasswordFieldState extends State<ConfirmPasswordField> {
             borderRadius: BorderRadius.all(Radius.circular(15))),
         child: Form(
           child: TextFormField(
-            controller: passwordFieldConfirmController,
+            controller: new_passwordFieldConfirmController,
             obscureText: true,
             enableSuggestions: false,
             autocorrect: false,
@@ -225,7 +229,7 @@ class _ConfirmPasswordFieldState extends State<ConfirmPasswordField> {
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return "Password cannot be empty";
-              } else if (value != passwordFieldController.text) {
+              } else if (value != new_passwordFieldController.text) {
                 return "Passwords must match";
               }
               return null;
