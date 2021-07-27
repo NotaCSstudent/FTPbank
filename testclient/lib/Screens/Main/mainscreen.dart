@@ -2,7 +2,7 @@ import 'package:client/Screens/SignIn/background.dart';
 import 'package:client/Screens/SignIn/signin.dart';
 import 'package:client/Screens/SignIn/signinbtn.dart';
 import 'package:client/Screens/SignUp/signupbtn.dart';
-
+import 'package:client/Screens/Main/cardmodel.dart';
 import 'package:client/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -228,20 +228,26 @@ class MainScreen extends StatelessWidget {
                 ],
               ),
             ),
-            
+
             // put cards here
             //insights?
             // then put the transactions
 
-
-            Center
-            (
-              child: Container(
-                height: 199,
-                width: 294,
-                child: Text("Hello World"),
-              )
-            ),
+            Center(
+                child: Container(
+              height: 200,///CHANGES CREATED HERE 
+              width: 200,
+              color: Colors.white,
+              child: Text(
+                cards[0].user,
+                style: GoogleFonts.habibi(
+                  textStyle: TextStyle(
+                      color: PinkAccent,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            )),
           ],
         ),
       ),
