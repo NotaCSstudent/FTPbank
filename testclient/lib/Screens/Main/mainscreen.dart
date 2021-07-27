@@ -235,19 +235,30 @@ class MainScreen extends StatelessWidget {
 
             Center(
                 child: Container(
-              height: 200,///CHANGES CREATED HERE 
-              width: 200,
-              color: Colors.white,
-              child: Text(
-                cards[0].user,
-                style: GoogleFonts.habibi(
-                  textStyle: TextStyle(
-                      color: PinkAccent,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold),
-                ),
+                  height:150,
+                  width: 300,
+                  decoration: BoxDecoration(
+                    color: Colors.lightBlue,
+                    borderRadius: BorderRadius.all(Radius.circular(10)),),
+            child : new Center(
+              child: new Text("Chase Bank",style: TextStyle(color: Colors.white, fontSize:22),
               ),
+            )
             )),
+           Center(
+             child: Container(
+               height: 150,
+               width: 300,
+               decoration: BoxDecoration(
+                 color: Colors.red,
+                 borderRadius:  BorderRadius.all(Radius.circular(10)),),
+                 child: new Center(
+                   child: new Text("Bank Of America", style: TextStyle(color:Colors.white,fontSize: 22),
+                   )
+                 ),
+             ),
+
+           ),
           ],
         ),
       ),
