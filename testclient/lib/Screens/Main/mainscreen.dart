@@ -7,18 +7,58 @@ import 'package:client/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:client/userinfo.dart';
+import 'package:carousel_slider/carousel_controller.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+
+
 
 // for now empty, add some dummy data here later after reading the API docs
 // String name = User.name;
 
 class MainScreen extends StatelessWidget {
+  
   const MainScreen({Key? key}) : super(key: key);
 
   @override
+  List<Widget> shapes() {
+    return [
+      Container(
+                    height: 150,
+                    width: 300,
+                    decoration: BoxDecoration(
+                      color: Colors.lightBlue,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                      child: new Center(
+                      child: new Text(
+                        "Chase Bank",
+                        style: TextStyle(color: Colors.white, fontSize: 22),
+                      ),
+                    )),
+
+                    Container(
+                      height: 150,
+                    width: 300,
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                      child: new Center(
+                      child: new Text(
+                        "Bank Of America",
+                        style: TextStyle(color: Colors.white, fontSize: 22),
+                      ),
+                    )
+                    )
+                    ];//this will be our cards when we use our carousel
+  }
   Widget build(BuildContext context) {
     // String? name = userNameFieldController.text;
     Size size = MediaQuery.of(context).size; // Size of the screen
-
+    final CategoriesScroller categoriesScroller = CategoriesScroller();
+  ScrollController controller = ScrollController();
+  bool closeTopContainer = false;
+  double topContainer = 0;
     return Scaffold(
       drawer: Theme(
         data: Theme.of(context).copyWith(
@@ -233,35 +273,127 @@ class MainScreen extends StatelessWidget {
             //insights?
             // then put the transactions
 
+            
             Center(
-                child: Container(
-                  height:150,
-                  width: 300,
-                  decoration: BoxDecoration(
-                    color: Colors.lightBlue,
-                    borderRadius: BorderRadius.all(Radius.circular(10)),),
-            child : new Center(
-              child: new Text("Chase Bank",style: TextStyle(color: Colors.white, fontSize:22),
-              ),
-            )
-            )),
-           Center(
-             child: Container(
-               height: 150,
-               width: 300,
-               decoration: BoxDecoration(
-                 color: Colors.red,
-                 borderRadius:  BorderRadius.all(Radius.circular(10)),),
-                 child: new Center(
-                   child: new Text("Bank Of America", style: TextStyle(color:Colors.white,fontSize: 22),
-                   )
-                 ),
-             ),
+              child: Stack(
+                children: [
+                  CarouselSlider(items: shapes(),
+                   options: CarouselOptions(
+                     enlargeCenterPage: true,
+                     aspectRatio : 18/2,
 
-           ),
+                   ))
+                ],
+              ),
+            ),
+
+            Center(),
           ],
         ),
       ),
     );
   }
 }
+
+
+class CategoriesScroller extends StatelessWidget {
+  const CategoriesScroller();
+
+  @override
+  Widget build(BuildContext context) {
+    final double categoryHeight = MediaQuery.of(context).size.height * 0.30 - 50;
+    return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
+      scrollDirection: Axis.horizontal,
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        child: FittedBox(
+          fit: BoxFit.fill,
+          alignment: Alignment.topCenter,
+          child: Row(
+            children: <Widget>[
+              Container(
+                width: 150,
+                margin: EdgeInsets.only(right: 20),
+                height: categoryHeight,
+                decoration: BoxDecoration(color: Colors.orange.shade400, borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Most\nFavorites",
+                        style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "20 Items",
+                        style: TextStyle(fontSize: 16, color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                width: 150,
+                margin: EdgeInsets.only(right: 20),
+                height: categoryHeight,
+                decoration: BoxDecoration(color: Colors.blue.shade400, borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "Newest",
+                          style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "20 Items",
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                width: 150,
+                margin: EdgeInsets.only(right: 20),
+                height: categoryHeight,
+                decoration: BoxDecoration(color: Colors.lightBlueAccent.shade400, borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Super\nSaving",
+                        style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "20 Items",
+                        style: TextStyle(fontSize: 16, color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
