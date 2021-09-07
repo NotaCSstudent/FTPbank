@@ -12,15 +12,15 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 // for now empty, add some dummy data here later after reading the API docs
 // String name = User.name;
-final List<String> items = [
-  "item1",
-  "item3",
-  "item2",
-  "item4",
-  "item5",
-  "item6",
-  "item7",
-  "item8",
+final List<List<String>> items = [
+  ["item1", "23"],
+  ["item3", "21"],
+  ["item2", "20"],
+  ["item4", "22"],
+  ["item5", "200"],
+  ["item6", "211"],
+  ["item7", "2211"],
+  ["item8", "2212"]
 ];
 
 class MainScreen extends StatelessWidget {
@@ -357,13 +357,26 @@ class _TransactionsListState extends State<TransactionsList> {
           itemCount: items.length,
           itemBuilder: (context, index) {
             return ListTile(
-              title: Text(
-                items[index],
-                style: GoogleFonts.habibi(
-                    textStyle: TextStyle(
-                        color: BackgroundColor,
-                        fontSize: 20,
-                        fontWeight: FontWeight.normal)),
+              title: Row(
+                children: [
+                  Text(
+                    items[index][0],
+                    style: GoogleFonts.habibi(
+                        textStyle: TextStyle(
+                            color: BackgroundColor,
+                            fontSize: 20,
+                            fontWeight: FontWeight.normal)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "\$" + items[index][1],
+                    style: GoogleFonts.habibi(
+                        textStyle: TextStyle(
+                            color: BackgroundColor,
+                            fontSize: 20,
+                            fontWeight: FontWeight.normal)),
+                  ),
+                ],
               ),
             );
           }),
