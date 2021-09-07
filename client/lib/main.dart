@@ -1,6 +1,7 @@
 import 'package:client/Screens/SignIn/signin.dart';
 import 'package:client/Screens/SignUp/signup.dart';
 import 'package:flutter/material.dart';
+import 'package:client/Screens/Main/mainscreen.dart';
 
 import 'constants.dart';
 
@@ -17,7 +18,28 @@ class MyApp extends StatelessWidget {
         primaryColor: BackgroundColor,
         scaffoldBackgroundColor: BackgroundColor,
       ),
-      home: SafeArea(child: Signin()),
+      home: SafeArea(child: MainScreen()),
     );
   }
 }
+/*
+class VerticalSliderDemo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Vertical sliding carousel demo')),
+      body: Container(
+          child: CarouselSlider(
+        options: CarouselOptions(
+          aspectRatio: 2.0,
+          enlargeCenterPage: true,
+          scrollDirection: Axis.vertical,
+          autoPlay: true,
+        ),
+        items: imageSliders,
+      )),
+    );
+  }
+}
+
+*/

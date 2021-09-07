@@ -2,23 +2,37 @@ import 'package:client/Screens/SignIn/background.dart';
 import 'package:client/Screens/SignIn/signin.dart';
 import 'package:client/Screens/SignIn/signinbtn.dart';
 import 'package:client/Screens/SignUp/signupbtn.dart';
-
+import 'package:client/Screens/Main/cardmodel.dart';
 import 'package:client/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:client/userinfo.dart';
+import 'package:carousel_slider/carousel_controller.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 // for now empty, add some dummy data here later after reading the API docs
 // String name = User.name;
+final List<String> items = [
+  "item1",
+  "item3",
+  "item2",
+  "item4",
+  "item5",
+  "item6",
+  "item7",
+  "item8",
+];
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
 
-  @override
   Widget build(BuildContext context) {
     // String? name = userNameFieldController.text;
     Size size = MediaQuery.of(context).size; // Size of the screen
-
+    final CategoriesScroller categoriesScroller = CategoriesScroller();
+    ScrollController controller = ScrollController();
+    bool closeTopContainer = false;
+    double topContainer = 0;
     return Scaffold(
       drawer: Theme(
         data: Theme.of(context).copyWith(
@@ -228,21 +242,240 @@ class MainScreen extends StatelessWidget {
                 ],
               ),
             ),
-            
+
             // put cards here
             //insights?
             // then put the transactions
 
-
-            Center
-            (
-              child: Container(
-                height: 199,
-                width: 294,
-                child: Text("Hello World"),
-              )
+            Center(
+              child: Stack(
+                children: [
+                  CarouselSlider(
+                      items: [
+                        Container(
+                            height: size.height / 2,
+                            width: 300,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topRight,
+                                end: Alignment.centerLeft,
+                                colors: [
+                                  Colors.lightBlue.withOpacity(0.5),
+                                  Colors.blue.withOpacity(0.2),
+                                  Colors.black.withOpacity(0.5)
+                                ],
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Chase Bank",
+                                style: GoogleFonts.habibi(
+                                  textStyle: TextStyle(
+                                      color: LightGrey,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.normal),
+                                ),
+                              ),
+                            )),
+                        Container(
+                            height: size.height / 2,
+                            width: 300,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.center,
+                                end: Alignment.topLeft,
+                                colors: [
+                                  Colors.red.withOpacity(0.8),
+                                  Colors.red.shade900.withOpacity(0.3)
+                                ],
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Bank of America",
+                                style: GoogleFonts.habibi(
+                                  textStyle: TextStyle(
+                                      color: LightGrey,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ))
+                      ],
+                      options: CarouselOptions(
+                        enlargeCenterPage: true,
+                        aspectRatio: size.height / 400,
+                      ))
+                ],
+              ),
             ),
+            // Spacer(),
+            Text("Transactions",
+                style: GoogleFonts.habibi(
+                    textStyle: TextStyle(
+                        color: LightBlueAccent,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold))),
+            Center(
+              child: TransactionsList(),
+            ),
+
+            // Center(),
+            // CategoriesScroller(),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class TransactionsList extends StatefulWidget {
+  const TransactionsList({Key? key}) : super(key: key);
+
+  @override
+  _TransactionsListState createState() => _TransactionsListState();
+}
+
+class _TransactionsListState extends State<TransactionsList> {
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    return Container(
+      decoration: BoxDecoration(
+          // color: Colors.white.withOpacity(1),
+          gradient: LinearGradient(colors: [PinkAccent, LightBlueAccent]),
+          borderRadius: BorderRadius.circular(16)),
+      padding: EdgeInsets.all(8.0),
+      height: size.height / 2,
+      width: size.width - 20,
+      child: ListView.builder(
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(
+                items[index],
+                style: GoogleFonts.habibi(
+                    textStyle: TextStyle(
+                        color: BackgroundColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.normal)),
+              ),
+            );
+          }),
+    );
+  }
+}
+
+class CategoriesScroller extends StatelessWidget {
+  const CategoriesScroller();
+
+  @override
+  Widget build(BuildContext context) {
+    final double categoryHeight =
+        MediaQuery.of(context).size.height * 0.30 - 50;
+    return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
+      scrollDirection: Axis.horizontal,
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        child: FittedBox(
+          fit: BoxFit.fill,
+          alignment: Alignment.topCenter,
+          child: Row(
+            children: <Widget>[
+              Container(
+                width: 150,
+                margin: EdgeInsets.only(right: 20),
+                height: categoryHeight,
+                decoration: BoxDecoration(
+                    color: Colors.orange.shade400,
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Most\nFavorites",
+                        style: TextStyle(
+                            fontSize: 25,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Spacer(),
+                      Text(
+                        "20 Items",
+                        style: TextStyle(fontSize: 16, color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                width: 150,
+                margin: EdgeInsets.only(right: 20),
+                height: categoryHeight,
+                decoration: BoxDecoration(
+                    color: Colors.blue.shade400,
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "Newest",
+                          style: TextStyle(
+                              fontSize: 25,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Spacer(),
+                        Text(
+                          "20 Items",
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                width: 150,
+                margin: EdgeInsets.only(right: 20),
+                height: categoryHeight,
+                decoration: BoxDecoration(
+                    color: Colors.lightBlueAccent.shade400,
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Super\nSaving",
+                        style: TextStyle(
+                            fontSize: 25,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Spacer(),
+                      Text(
+                        "20 Items",
+                        style: TextStyle(fontSize: 16, color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
