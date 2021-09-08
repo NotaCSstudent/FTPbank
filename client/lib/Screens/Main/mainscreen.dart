@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:client/userinfo.dart';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:prompt_dialog/prompt_dialog.dart';
 
 // for now empty, add some dummy data here later after reading the API docs
 // String name = User.name;
@@ -17,6 +18,10 @@ final List<List<String>> items = [
   ["item3", "21"],
   ["item2", "20"],
   ["item4", "22"],
+  ["item5", "200"],
+  ["item6", "211"],
+  ["item7", "2211"],
+  ["item8", "2212"],
   ["item5", "200"],
   ["item6", "211"],
   ["item7", "2211"],
@@ -187,6 +192,32 @@ class MainScreen extends StatelessWidget {
                 color: PinkAccent,
                 size: 35,
               ),
+              onSelected: (newValue) async {
+                if (newValue == 1) {
+                  await prompt(context,
+                      title: Text(
+                        "Add Card",
+                        style: GoogleFonts.habibi(
+                          textStyle:
+                              TextStyle(color: BackgroundColor, fontSize: 18),
+                        ),
+                      ),
+                      textOK: Text(
+                        "Add Card",
+                        style: GoogleFonts.habibi(
+                            textStyle: TextStyle(
+                                color: BackgroundColor, fontSize: 18)),
+                      ),
+                      textCancel: Text(
+                        "Cancel",
+                        style: GoogleFonts.habibi(
+                            textStyle: TextStyle(
+                                color: BackgroundColor, fontSize: 18)),
+                      ));
+                } else if (newValue == 2) {
+                  print("add transaction");
+                }
+              },
               itemBuilder: (context) => [
                     PopupMenuItem(
                       child: Text(
@@ -195,7 +226,7 @@ class MainScreen extends StatelessWidget {
                           textStyle: TextStyle(color: LightGrey, fontSize: 18),
                         ),
                       ),
-                      value: 0,
+                      value: 1,
                     ),
                     PopupMenuItem(
                       child: Text(
@@ -253,7 +284,7 @@ class MainScreen extends StatelessWidget {
                   CarouselSlider(
                       items: [
                         Container(
-                            height: size.height / 2,
+                            height: 300,
                             width: 300,
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
@@ -280,7 +311,7 @@ class MainScreen extends StatelessWidget {
                               ),
                             )),
                         Container(
-                            height: size.height / 2,
+                            height: 300,
                             width: 300,
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
@@ -348,10 +379,10 @@ class _TransactionsListState extends State<TransactionsList> {
     return Container(
       decoration: BoxDecoration(
           // color: Colors.white.withOpacity(1),
-          gradient: LinearGradient(colors: [PinkAccent, LightBlueAccent]),
+          gradient: LinearGradient(colors: [MedBlueAccent, PinkAccent]),
           borderRadius: BorderRadius.circular(16)),
       padding: EdgeInsets.all(8.0),
-      height: size.height / 2,
+      height: size.height / 1.7,
       width: size.width - 20,
       child: ListView.builder(
           itemCount: items.length,

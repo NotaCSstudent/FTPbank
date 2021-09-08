@@ -34,7 +34,7 @@ dependencies:
   http: ^0.13.3
   sizer: ^2.0.13
   carousel_slider: ^4.0.0
-
+  prompt_dialog: ^1.0.5
 dev_dependencies:
   flutter_test:
     sdk: flutter
