@@ -284,7 +284,7 @@ class MainScreen extends StatelessWidget {
                   CarouselSlider(
                       items: [
                         Container(
-                            height: 300,
+                            // height: 200,
                             width: 300,
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
@@ -311,7 +311,7 @@ class MainScreen extends StatelessWidget {
                               ),
                             )),
                         Container(
-                            height: 300,
+                            // height: 200,
                             width: 300,
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
@@ -338,9 +338,9 @@ class MainScreen extends StatelessWidget {
                             ))
                       ],
                       options: CarouselOptions(
-                        enlargeCenterPage: true,
-                        aspectRatio: size.height / 400,
-                      ))
+                          enlargeCenterPage: true,
+                          height: size.height / 3,
+                          aspectRatio: 16 / 9))
                 ],
               ),
             ),
